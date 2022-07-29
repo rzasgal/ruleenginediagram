@@ -22,53 +22,21 @@
   <meta name="theme-color" content="#fafafa">
   <script src="https://unpkg.com/gojs/release/go-debug.js"></script>
 
-  <script>
-    var condition=[
-      {"PhysicalCardRequest":"YES"},
-      {"DeliveryAddressPolygonRelation":"INSIDE"},
-      {"DeliveryAddressPolygonRelation":"INSIDE"},
-    ]
-  </script>
+  <script src="js/ruleengineresulttransformer.js"></script>
+  <script src="js/diagramtemplate.js"></script>
 
 </head>
 
 <body>
 <div id="myDiagramDiv"
-     style="width:750px; height:550px; background-color: #DAE4E4;"></div>
+     style="width:2000px; height:3000px; background-color: #DAE4E4;"></div>
   <script defer>
-    const myDiagram = new go.Diagram("myDiagramDiv",
-      {
-        "undoManager.isEnabled": true,
-        layout: new go.TreeLayout({ angle: 90, layerSpacing: 35 })
-      });
-
-
-    // the template we defined earlier
-    myDiagram.nodeTemplate =
-      new go.Node("Horizontal",
-        { background: "#44CCFF" })
-        .add(new go.TextBlock("Default Text",
-          { margin: 12, stroke: "white", font: "bold 16px sans-serif" })
-          .bind("text", "name"));
-    var km = myDiagram.linkTemplate;
-      km.add(new go.TextBlock("Default Text",
-        { margin: 12, stroke: "black", font: "bold 16px sans-serif" }).bind("text", "tst"))
-      ;
-    myDiagram.model = new go.TreeModel(
-      [ // the "key" and "parent" property names are required,
-        // but you can add whatever data properties you need for your app
-        { key: "1",              name: "Don Meow",   source: "cat1.png" },
-        { key: "2", parent: "1", name: "Demeter",    source: "cat2.png", tst:"asdasd" },
-        { key: "3", parent: "1", name: "Copricat",   source: "cat3.png" },
-        { key: "4", parent: "3", name: "Jellylorum", source: "cat4.png" },
-        { key: "5", parent: "3", name: "Alonzo",     source: "cat5.png" },
-        { key: "6", parent: "2", name: "Munkustrap", source: "cat6.png" }
-      ]);
+    let data = [];
+    let model = createModelFromData(data);
+    createDiagram("myDiagramDiv", model);
   </script>
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
-
-
 </body>
 
 </html>
